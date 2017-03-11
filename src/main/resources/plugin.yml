@@ -1,0 +1,5 @@
+name: SpeedCoding
+version: ${project.version}
+main: me.binarydctr.speedcoding.SpeedCoding
+authors: [BinaryDctr]
+description: Contains a whole new season of speed coding.
