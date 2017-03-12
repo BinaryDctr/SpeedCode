@@ -60,7 +60,7 @@ public class SQLCalls {
     *
      */
 
-    public static void addPlayerToDatabase(Player player, Callback<Integer, SQLException> callback) {
+    public static void addPlayerToTravelDatabase(Player player, Callback<Integer, SQLException> callback) {
         new UpdateRunnable(Pool.TEST, "INSERT INTO `travel` (uuid, name, traveled) VALUES ('"+player.getUniqueId().toString()+"', '"+player.getName()+"', '0') ON DUPLICATE KEY UPDATE name='"+player.getName()+"'", callback).runTaskAsynchronously(SpeedCoding.getInstance());
     }
 
@@ -70,5 +70,30 @@ public class SQLCalls {
 
     public static void getBlocksTraveled(String uuid, Callback<ResultSet, SQLException> callback) {
         new QueryRunnable(Pool.TEST, "SELECT traveled FROM `travel` WHERE uuid='"+uuid+"'", callback).runTaskAsynchronously(SpeedCoding.getInstance());
+    }
+
+    /*
+    *
+    *
+    * WARN SQL CALLS
+    *
+    *
+    *
+     */
+
+    public static void addPlayerToWarnDatabase(String warner, String warned, String inform, Callback<Integer, SQLException> callback) {
+        new UpdateRunnable(Pool.TEST, "INSERT INTO `warn` (warner, warned, inform) VALUES ('"+warner+"', '"+warned+"', '"+inform+"')", callback).runTaskAsynchronously(SpeedCoding.getInstance());
+    }
+
+    public static void getWarnings(String warned, Callback<ResultSet, SQLException> callback) {
+        new QueryRunnable(Pool.TEST, "SELECT * FROM `warn` WHERE warned='"+warned+"'", callback).runTaskAsynchronously(SpeedCoding.getInstance());
+    }
+
+    public static void getWarningsInform(String warned, Callback<ResultSet, SQLException> callback) {
+        new QueryRunnable(Pool.TEST, "SELECT * FROM `warn` WHERE warned='"+warned+"' AND inform='t'", callback).runTaskAsynchronously(SpeedCoding.getInstance());
+    }
+
+    public static void updateInform(String warned, Callback<Integer, SQLException> callback) {
+        new UpdateRunnable(Pool.TEST, "UPDATE `warn` SET=inform'f' WHERE warned='"+warned+"'", callback).runTaskAsynchronously(SpeedCoding.getInstance());
     }
 }

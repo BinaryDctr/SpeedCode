@@ -1,19 +1,18 @@
-package me.binarydctr.speedcoding.move.sql;
+package me.binarydctr.speedcoding.warn.sql;
 
 import me.binarydctr.speedcoding.sql.Database;
 import me.binarydctr.speedcoding.sql.Pool;
 import me.binarydctr.speedcoding.utils.Logger;
 
-import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class MoveDatabase extends Database {
+public class WarnDatabase extends Database {
 
-    private static String CREATE = "CREATE TABLE IF NOT EXISTS `travel` (uuid VARCHAR(36), name VARCHAR(18), traveled INT, PRIMARY KEY (uuid))";
+    private static String CREATE = "CREATE TABLE IF NOT EXISTS `warn` (warner VARCHAR(16), warned VARCHAR(16), inform VARCHAR(8), PRIMARY KEY (warner))";
 
-    public MoveDatabase() {
+    public WarnDatabase() {
         super(Pool.TEST);
     }
 
@@ -25,10 +24,11 @@ public class MoveDatabase extends Database {
             connection = getConnection();
 
             preparedStatement = connection.prepareStatement(CREATE);
+
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            Logger.log(Logger.LogType.ERROR, "TRAVEL DATABASE WASN'T CREATED.");
+            Logger.log(Logger.LogType.ERROR, "WARN DATABASE WASN'T CREATED.");
         } finally {
             if(preparedStatement != null) {
                 try {

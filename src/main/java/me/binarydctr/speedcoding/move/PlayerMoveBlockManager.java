@@ -35,7 +35,7 @@ public class PlayerMoveBlockManager implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
-        SQLCalls.addPlayerToDatabase(event.getPlayer(), (result, thrown) -> {
+        SQLCalls.addPlayerToTravelDatabase(event.getPlayer(), (result, thrown) -> {
             Logger.log(Logger.LogType.INFO, "Successfully added " + event.getPlayer().getName() + " to travel database.");
         });
     }
